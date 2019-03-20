@@ -20,5 +20,5 @@ star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR
 
 ## convert wiggle files into bigWig
 use unique.str1.wig files, as we are only interested in uniquely mapped reads(?). 
-wigToBigWig /home/laskina/srr.wig sizes.genome /home/laskina/srr10.bw
+`wigToBigWig /home/laskina/srr.wig sizes.genome /home/laskina/srr10.bw`
 Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must rename or ignore other chromosomes

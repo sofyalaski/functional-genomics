@@ -1,0 +1,23 @@
+42355	SRR5077628_1_peaks.narrowPeak	H3K4me3; Mus musculus; ChIP-Seq	HM
+171863	SRR5077632_1_peaks.narrowPeak	H3K4me2; Mus musculus; ChIP-Seq	HM
+199966	SRR5077636_1_peaks.narrowPeak	H3K4me1; Mus musculus; ChIP-Seq	HM
+122129	SRR5077640_1_peaks.narrowPeak	H3K9ac; Mus musculus; ChIP-Seq	HM
+106031	SRR5077644_1_peaks.narrowPeak	H3K27ac; Mus musculus; ChIP-Seq	HM
+24295	SRR5077648_1_peaks.narrowPeak	H3K27me3; Mus musculus; ChIP-Seq	HM
+67879	SRR5077652_1_peaks.narrowPeak	H3K79me2; Mus musculus; ChIP-Seq	HM
+98844	SRR5077656_1_peaks.narrowPeak	H3K36me3; Mus musculus; ChIP-Seq	HM
+65494	SRR5077660_1_peaks.narrowPeak	H3K9me3; Mus musculus; ChIP-Seq	HM
+61574	SRR5077664_1_peaks.narrowPeak	H3.3; Mus musculus; ChIP-Seq	HM
+0	SRR5077668_1_peaks.narrowPeak	H3; Mus musculus; ChIP-Seq	HM
+24981	SRR5077692_1_peaks.narrowPeak	Klf4; Mus musculus; ChIP-Seq	TF
+3482	SRR5077693_1_peaks.narrowPeak	cMyc; Mus musculus; ChIP-Seq	TF
+13787	SRR5077717_1_peaks.narrowPeak	p300; Mus musculus; ChIP-Seq	TF
+48029	SRR5077721_1_peaks.narrowPeak	Hdac1; Mus musculus; ChIP-Seq	TF
+30365	SRR5077725_1_peaks.narrowPeak	Brg1; Mus musculus; ChIP-Seq	TF
+29475	SRR5077690_1_peaks.narrowPeak	Oct4; Mus musculus; ChIP-Seq	TF
+29785	SRR5077691_1_peaks.narrowPeak	Sox2; Mus musculus; ChIP-Seq	TF
+72111	SRR5077735_1_peaks.narrowPeak	Nanog; Mus musculus; ChIP-Seq	TF
+59666	SRR5077736_1_peaks.narrowPeak	Esrrb; Mus musculus; ChIP-Seq	TF
+1272233	total	total	none	none	none	none
+
+

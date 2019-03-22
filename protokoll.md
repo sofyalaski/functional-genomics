@@ -39,7 +39,7 @@ for i in $WCETreatment;
 done ;
 ~~~
 
-Calculating the average wodht of peaks:
+Calculating the average widht of peaks:
 ```
 touch avgLength.txt
 for i in 'ls *.xls';

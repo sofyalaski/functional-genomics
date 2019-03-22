@@ -1,3 +1,5 @@
+Getting the counts of peaks through: wc -l file.bed
+
 MEF and ESC have 5569 KLF4 peaks in common. 
 MEF and ESC have 2231 cMyc peaks in common.
 There are 14660 unique KLF4 peaks in MEF.

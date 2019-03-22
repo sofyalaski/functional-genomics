@@ -16,30 +16,16 @@ bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-align
     do /package/sequencer/bowtie2/current/bin/bowtie2 -p 50 -x /project/functional-genomics/2019/data/genome/mm9 -U $i.fastq -S ./mapped/$i.sam ;
 done ;
  ```
+filter bam files that habe quality <10 and >2 mismatches, remove duplicates
+	`samtools view -Sh -@ 50 -q 10 -F 1024 SRR5077625.sam | grep -e "^[@]" -e "XM:i:[012]" | samtools view -@ 50 -bSo SRR5077625_filtered.bam`
 Create bigWig files from the bam files using bamCoverage:
 ``` 
 for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 1` ;
 	do bamCoverage -b $i.bam -bs 25 --normalizeUsing RPKM -ignore chrX --extendReads 200 -o $i.bw ;
 done ;
  ```
-Quality Control:
-plotFingerprint for all TF's (MEF):
-``` 
-./plotFingerprint -b /project/functional-genomics/2019/group3/MEF/SRR5077732_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077730_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077728_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077726_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077722_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077718_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077714_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077677_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077676_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077673_sorted.bam -p max/2 -l Cebpb Cebpa Runx1 Fra1 Brg1 Hdac1 p300 cMyc Klf4 WCE_control -plot /project/functional-genomics/2019/group3/MEF/QC/fingerprint_MEF_TF.png 
- ``` 
-Create bamSummary/bigWigSummary:
-``` 
-./multiBamSummary bins -b /project/functional-genomics/2019/group3/MEF/*.bam -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_MEF.npz
-./multiBigwigSummary bins -b /project/functional-genomics/2019/group3/MEF/bigWig/*.bw -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz
-```  
-Quality Control:
-plotCorrelation from multiBamSummary /multiBigWigSummary (MEF):
-``` 
-./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_rm --removeOutliers --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_MEF_rm.png
-./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_bigWig_rm --removeOutliers --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_bigWig_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_bigWig_MEF_rm.png
-``` 
-
- # Peak calling with MACS2
+	
+# Peak calling with MACS2
 MACS2 https://github.com/taoliu/MACS
 ~~~
 MNaseTreatment="SRR5077653 SRR5077645 SRR5077641 SRR5077637 SRR5077633 SRR5077629 SRR5077625"
@@ -52,20 +38,26 @@ for i in $WCETreatment;
 	do macs2 callpeak -t ${i}_filtered.bam -c SRR5077673_filtered.bam -n $i -f BAM -g mm --bw 150 -q 0.005 --outdir peakcalling ;
 done ;
 ~~~
-Calculating average width:
-~~~
+
+Calculating the average wodht of peaks:
+```
 touch avgLength.txt
 for i in 'ls *.xls';
 	do Rscript calcAvgLength.R $i;
 done;
-~~~
+```
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf
 `STAR --runThreadN 20 --genomeDir /project/functional-genomics/2019/data/genome/STARindex --readFilesIn /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610.fastq --outFileNamePrefix /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610_ --outFilterMismatchNmax 3 --outSAMtype BAM SortedByCoordinate --bamRemoveDuplicatesType UniqueIdentical --outWigType wiggle --outWigStrand Unstranded --outWigNorm RPM`
 
 ## UCSC doesn't recognize all of chromosome names
 
-remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script)
+remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script filter_wiggle.py)
+``` 
+for j in `ls *.wig ` ;
+	do wigToBigWig rna_bigWig/${j} sizes.genome   rna_bigWig/${j |cut -d "_" -f 1 }.bw ;
+done;
+```
 
 ## convert wiggle files into bigWig
 use unique.str1.wig files, as we are only interested in uniquely mapped reads(?). 
@@ -74,7 +66,33 @@ Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must 
 
 ## count reads per gene 
 use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
-htseq-count -f bam -r name -o <alignment_files> <gff_file>
+`htseq-count -f bam -r name -o <alignment_files> <gff_file>`
+
+# Comparing peaks
+bedtools https://bedtools.readthedocs.io/en/latest/
+creating unified summits:
+```
+for j in `ls *.bed | cut -d "." -f 1` ;
+	do bedtools slop -i $j.bed -g mm9.genome -b 100 > ${j}_unified.bed ;
+done;
+```
+
+creating many different bedfiles:  
+``` bash peak_comparison.sh ```
+
+Results in peak_comparison.txt
+
+# Comparison with promotors
+Downloaded upstream2000.fa.gz from http://hgdownload.soe.ucsc.edu/goldenPath/mm9/bigZips/
+converted the fa file to a sorted bed file: 
+``` 
+python myFastaToBed.py
+bedtools sort -i upstream2000.bed > upstream2000_sorted.bed
+```
+creating bedfiles: 
+``` bash peaks_in_promotors.sh ```
+
+Results in peak_comparison.txt
 
 
 

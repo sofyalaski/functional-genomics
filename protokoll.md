@@ -39,7 +39,7 @@ plotCorrelation from multiBamSummary /multiBigWigSummary (MEF):
 ./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_bigWig_rm --removeOutliers --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_bigWig_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_bigWig_MEF_rm.png
 ``` 
 
- # Peak calling with MACS2
+ # peak calling with MACS2
 MACS2 https://github.com/taoliu/MACS
 ~~~
 MNaseTreatment="SRR5077653 SRR5077645 SRR5077641 SRR5077637 SRR5077633 SRR5077629 SRR5077625"
@@ -77,7 +77,7 @@ Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must 
 use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
 htseq-count -f bam -r name -o <alignment_files> <gff_file>
 
-# Comparing paeks
+# comparing peaks
 bedtools https://bedtools.readthedocs.io/en/latest/
 
 

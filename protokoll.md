@@ -38,6 +38,14 @@ for i in $WCETreatment;
 	do macs2 callpeak -t ${i}_filtered.bam -c SRR5077673_filtered.bam -n $i -f BAM -g mm --bw 150 -q 0.005 --outdir peakcalling ;
 done ;
 ~~~
+
+Calculating the average wodht of peaks:
+```
+touch avgLength.txt
+for i in 'ls *.xls';
+	do Rscript calcAvgLength.R $i;
+done;
+```
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf
 `STAR --runThreadN 20 --genomeDir /project/functional-genomics/2019/data/genome/STARindex --readFilesIn /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610.fastq --outFileNamePrefix /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610_ --outFilterMismatchNmax 3 --outSAMtype BAM SortedByCoordinate --bamRemoveDuplicatesType UniqueIdentical --outWigType wiggle --outWigStrand Unstranded --outWigNorm RPM`

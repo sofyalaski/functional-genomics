@@ -16,7 +16,10 @@ bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-align
     do /package/sequencer/bowtie2/current/bin/bowtie2 -p 50 -x /project/functional-genomics/2019/data/genome/mm9 -U $i.fastq -S ./mapped/$i.sam ;
 done ;
  ```
-
+Create bigWig files from the bam files using bamCoverage:
+for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 1` ;
+	do bamCoverage -b $i.bam -bs 25 --normalizeUsing RPKM -ignore chrX --extendReads 200 -o $i.bw ;
+done ;
 
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf

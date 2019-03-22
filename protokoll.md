@@ -77,5 +77,22 @@ Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must 
 use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
 htseq-count -f bam -r name -o <alignment_files> <gff_file>
 
+# Comparing paeks
+bedtools https://bedtools.readthedocs.io/en/latest/
 
 
+creating unified peak widths:
+``` bash unified_summits.sh```
+
+
+creating many different bedfiles:
+~~~ bash peak_comparison.sh```
+
+Results are in peak_comparison.txt
+
+## comparison with promotor regions
+
+creating bedfiles :
+``` bash peaks_in_promotor.sh ```
+
+Results are in peak_comparison.txt

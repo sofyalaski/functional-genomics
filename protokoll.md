@@ -29,10 +29,16 @@ plotFingerprint for all TF's (MEF):
  ``` 
 Create bamSummary/bigWigSummary:
 ``` 
-./multiBamSummary bins -b /project/functional-genomics/2019/group3/MEF/*.bam -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_MEF2.npz
+./multiBamSummary bins -b /project/functional-genomics/2019/group3/MEF/*.bam -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_MEF.npz
 ./multiBigwigSummary bins -b /project/functional-genomics/2019/group3/MEF/bigWig/*.bw -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz
 ```  
- 
+Quality Control:
+plotCorrelation from multiBamSummary /multiBigWigSummary (MEF):
+``` 
+./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_rm --removeOutliers --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_MEF_rm.png
+./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_bigWig_rm --removeOutliers --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_bigWig_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_bigWig_MEF_rm.png
+``` 
+
  # Peak calling with MACS2
 MACS2 https://github.com/taoliu/MACS
 ~~~

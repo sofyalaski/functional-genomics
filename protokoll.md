@@ -91,6 +91,10 @@ creating many different bedfiles:
 Results are in peak_comparison.txt
 
 ## comparison with promotor regions
+downloaded upstream2000.fa.gz from http://hgdownload.soe.ucsc.edu/goldenPath/mm9/bigZips/
+
+converting from .fa to .bed:
+``` python myFastaToBed.py```
 
 creating bedfiles :
 ``` bash peaks_in_promotor.sh ```

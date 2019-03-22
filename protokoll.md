@@ -16,8 +16,6 @@ bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-align
     do /package/sequencer/bowtie2/current/bin/bowtie2 -p 50 -x /project/functional-genomics/2019/data/genome/mm9 -U $i.fastq -S ./mapped/$i.sam ;
 done ;
  ```
-filter bam files that habe quality <10 and >2 mismatches, remove duplicates
-	`samtools view -Sh -@ 50 -q 10 -F 1024 SRR5077625.sam | grep -e "^[@]" -e "XM:i:[012]" | samtools view -@ 50 -bSo SRR5077625_filtered.bam`
 Create bigWig files from the bam files using bamCoverage:
 ``` 
 for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 1` ;
@@ -37,6 +35,13 @@ WCETreatment="SRR5077732 SRR5077730 SRR5077728 SRR5077726 SRR5077722 SRR5077718 
 for i in $WCETreatment;
 	do macs2 callpeak -t ${i}_filtered.bam -c SRR5077673_filtered.bam -n $i -f BAM -g mm --bw 150 -q 0.005 --outdir peakcalling ;
 done ;
+~~~
+Calculating average width:
+~~~
+touch avgLength.txt
+for i in 'ls *.xls';
+	do Rscript calcAvgLength.R $i;
+done;
 ~~~
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf

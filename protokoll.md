@@ -70,26 +70,27 @@ use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
 
 # Comparing peaks
 bedtools https://bedtools.readthedocs.io/en/latest/
-creating unified summits:
+
+##creating unified summits:
 ```
 for j in `ls *.bed | cut -d "." -f 1` ;
 	do bedtools slop -i $j.bed -g mm9.genome -b 100 > ${j}_unified.bed ;
 done;
 ```
 
-creating many different bedfiles:  
+##creating many different bedfiles:  
 ``` bash peak_comparison.sh ```
 
 Results in peak_comparison.txt
 
 # Comparison with promotors
 Downloaded upstream2000.fa.gz from http://hgdownload.soe.ucsc.edu/goldenPath/mm9/bigZips/
-converted the fa file to a sorted bed file: 
+##converted the fa file to a sorted bed file: 
 ``` 
 python myFastaToBed.py
 bedtools sort -i upstream2000.bed > upstream2000_sorted.bed
 ```
-creating bedfiles: 
+##creating bedfiles: 
 ``` bash peaks_in_promotors.sh ```
 
 Results in peak_comparison.txt

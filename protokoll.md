@@ -45,9 +45,11 @@ star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR
 ## UCSC doesn't recognize all of chromosome names
 
 remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script filter_wiggle.py)
-``` for j in `ls *.wig ` ;
+``` 
+for j in `ls *.wig ` ;
 	do wigToBigWig rna_bigWig/${j} sizes.genome   rna_bigWig/${j |cut -d "_" -f 1 }.bw ;
-done; ```
+done;
+```
 
 ## convert wiggle files into bigWig
 use unique.str1.wig files, as we are only interested in uniquely mapped reads(?). 

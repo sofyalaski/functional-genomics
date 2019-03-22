@@ -86,7 +86,7 @@ creating unified peak widths:
 
 
 creating many different bedfiles:
-~~~ bash peak_comparison.sh```
+``` bash peak_comparison.sh```
 
 Results are in peak_comparison.txt
 

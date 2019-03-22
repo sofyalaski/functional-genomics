@@ -16,14 +16,17 @@ bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-align
     do /package/sequencer/bowtie2/current/bin/bowtie2 -p 50 -x /project/functional-genomics/2019/data/genome/mm9 -U $i.fastq -S ./mapped/$i.sam ;
 done ;
  ```
-filter bam files that habe quality <10 and >2 mismatches, remove duplicates
-	`samtools view -Sh -@ 50 -q 10 -F 1024 SRR5077625.sam | grep -e "^[@]" -e "XM:i:[012]" | samtools view -@ 50 -bSo SRR5077625_filtered.bam`
 Create bigWig files from the bam files using bamCoverage:
 ``` 
 for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 1` ;
 	do bamCoverage -b $i.bam -bs 25 --normalizeUsing RPKM -ignore chrX --extendReads 200 -o $i.bw ;
 done ;
  ```
+Quality Control
+plotFingerprint for all TF's (MEF):
+``` 
+./plotFingerprint -b /project/functional-genomics/2019/group3/MEF/SRR5077732_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077730_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077728_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077726_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077722_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077718_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077714_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077677_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077676_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077673_sorted.bam -p max/2 -l Cebpb Cebpa Runx1 Fra1 Brg1 Hdac1 p300 cMyc Klf4 WCE_control -plot /project/functional-genomics/2019/group3/MEF/QC/fingerprint_MEF_TF.png 
+ ``` 
 	
 # Peak calling with MACS2
 MACS2 https://github.com/taoliu/MACS
@@ -38,26 +41,20 @@ for i in $WCETreatment;
 	do macs2 callpeak -t ${i}_filtered.bam -c SRR5077673_filtered.bam -n $i -f BAM -g mm --bw 150 -q 0.005 --outdir peakcalling ;
 done ;
 ~~~
-
-Calculating the average wodht of peaks:
-```
+Calculating average width:
+~~~
 touch avgLength.txt
 for i in 'ls *.xls';
 	do Rscript calcAvgLength.R $i;
 done;
-```
+~~~
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf
 `STAR --runThreadN 20 --genomeDir /project/functional-genomics/2019/data/genome/STARindex --readFilesIn /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610.fastq --outFileNamePrefix /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610_ --outFilterMismatchNmax 3 --outSAMtype BAM SortedByCoordinate --bamRemoveDuplicatesType UniqueIdentical --outWigType wiggle --outWigStrand Unstranded --outWigNorm RPM`
 
 ## UCSC doesn't recognize all of chromosome names
 
-remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script filter_wiggle.py)
-``` 
-for j in `ls *.wig ` ;
-	do wigToBigWig rna_bigWig/${j} sizes.genome   rna_bigWig/${j |cut -d "_" -f 1 }.bw ;
-done;
-```
+remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script)
 
 ## convert wiggle files into bigWig
 use unique.str1.wig files, as we are only interested in uniquely mapped reads(?). 
@@ -66,7 +63,7 @@ Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must 
 
 ## count reads per gene 
 use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
-`htseq-count -f bam -r name -o <alignment_files> <gff_file>`
+htseq-count -f bam -r name -o <alignment_files> <gff_file>
 
 
 

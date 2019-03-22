@@ -59,7 +59,7 @@ for i in 'ls *.xls';
 	do Rscript calcAvgLength.R $i;
 done;
 ~~~
-For sreenshots of target genes in IGV see the folder ScreenshotsIGV 
+For screenshots of target genes in IGV see the folder ScreenshotsIGV 
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf
 `STAR --runThreadN 20 --genomeDir /project/functional-genomics/2019/data/genome/STARindex --readFilesIn /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610.fastq --outFileNamePrefix /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610_ --quantMode GeneCounts --outFilterMismatchNmax 3 --outSAMtype BAM SortedByCoordinate --bamRemoveDuplicatesType UniqueIdentical --outWigType wiggle --outWigStrand Unstranded --outWigNorm RPM`

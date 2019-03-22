@@ -11,9 +11,11 @@ convert files into fastq files with SRA Toolkit
 # Bowtie2 Mapping(Chip-Seq, Atac-Seq)
 bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-aligner
 #mismatches -> filter from SAM file(XM:i:<N>The number of mismatches in the alignment. Only present if SAM record is for an aligned read.)
-```for i in `ls *.fastq | cut -d "." -f 1` ;
+``` 
+    for i in `ls *.fastq | cut -d "." -f 1` ;
     do /package/sequencer/bowtie2/current/bin/bowtie2 -p 50 -x /project/functional-genomics/2019/data/genome/mm9 -U $i.fastq -S ./mapped/$i.sam ;
-done ;```
+done ;
+ ```
 
 
 # STAR Mapping(Rna-Seq)

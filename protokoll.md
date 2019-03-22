@@ -22,13 +22,18 @@ for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 
 	do bamCoverage -b $i.bam -bs 25 --normalizeUsing RPKM -ignore chrX --extendReads 200 -o $i.bw ;
 done ;
  ```
-Quality Control
+Quality Control:
 plotFingerprint for all TF's (MEF):
 ``` 
 ./plotFingerprint -b /project/functional-genomics/2019/group3/MEF/SRR5077732_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077730_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077728_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077726_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077722_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077718_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077714_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077677_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077676_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077673_sorted.bam -p max/2 -l Cebpb Cebpa Runx1 Fra1 Brg1 Hdac1 p300 cMyc Klf4 WCE_control -plot /project/functional-genomics/2019/group3/MEF/QC/fingerprint_MEF_TF.png 
  ``` 
-	
-# Peak calling with MACS2
+Create bamSummary/bigWigSummary:
+``` 
+./multiBamSummary bins -b /project/functional-genomics/2019/group3/MEF/*.bam -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_MEF2.npz
+./multiBigwigSummary bins -b /project/functional-genomics/2019/group3/MEF/bigWig/*.bw -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz
+```  
+ 
+ # Peak calling with MACS2
 MACS2 https://github.com/taoliu/MACS
 ~~~
 MNaseTreatment="SRR5077653 SRR5077645 SRR5077641 SRR5077637 SRR5077633 SRR5077629 SRR5077625"

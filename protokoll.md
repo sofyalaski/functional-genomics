@@ -26,6 +26,9 @@ use unique.str1.wig files, as we are only interested in uniquely mapped reads(?)
 `wigToBigWig /home/laskina/srr.wig sizes.genome /home/laskina/srr10.bw`
 Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must rename or ignore other chromosomes(done in previous step)
 
+## count reads per gene 
+use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
+htseq-count -f bam -r name -o <alignment_files> <gff_file>
 
 
 

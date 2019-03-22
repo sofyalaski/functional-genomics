@@ -1,0 +1,31 @@
+MEF and ESC have 5569 KLF4 peaks in common. 
+MEF and ESC have 2231 cMyc peaks in common.
+There are 14660 unique KLF4 peaks in MEF.
+There are 19414 unique KLF4 peaks in ESC.
+There are 19813 unique cMyc peaks in MEF.
+There are 1256 unique cMyc peaks in ESC.
+
+In ESC:
+Oct4 and SOX2 share 19076 peaks.
+Oct4 and KLF4 share 5459 peaks.
+Oct4 and cMyc share 411 peaks.
+SOX2 and KLF4 share 6653 peaks.
+SOX2 and cMyc share 455 peaks.
+KLF4 and cMyc share 683 peaks.
+Oct4, SOX2 and KLF4 share 7690 peaks.
+Oct4, SOX2 and cMyc share 624 peaks.
+Oct4, KLF4 and cMyc share 902 peaks.
+SOX2, KLF4 and cMyc share 937 peaks.
+All transcription factors share 1056 peaks. ??
+
+In MEF:
+KLF4 and cMyc(all transcription factors) share 7214 peaks.
+
+Promotor regions:
+12252 of 20209 peaks of KLF4 in MEF are in promotor regions.
+12587 of 22039 peaks of cMyc in MEF are in promotor regions.
+
+3249 of 29475 peaks of Oct4 in ESC are in promotor regions. 
+3644 of 29785 peaks of SOX2 in ESC are in promotor regions.
+6712 of 24981 peaks of KLF4 in ESC are in promotor regions.
+3195 of 3482 peaks of cMyc in ESC are in promotor regions.

@@ -23,6 +23,19 @@ for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 
 done ;
  ```
 	
+# Peak calling with MACS2
+MACS2 https://github.com/taoliu/MACS
+~~~
+MNaseTreatment="SRR5077653 SRR5077645 SRR5077641 SRR5077637 SRR5077633 SRR5077629 SRR5077625"
+for i in $MNaseTreatment;
+	do macs2 callpeak -t ${i}_filtered.bam -c SRR5077669_filtered.bam -n $i -f BAM -g mm --bw 150 -q 0.005 --outdir peakcalling ;
+done ;
+
+WCETreatment="SRR5077732 SRR5077730 SRR5077728 SRR5077726 SRR5077722 SRR5077718 SRR5077714 SRR5077677 SRR5077676 SRR5077665 SRR5077661 SRR5077657 SRR5077649"
+for i in $WCETreatment;
+	do macs2 callpeak -t ${i}_filtered.bam -c SRR5077673_filtered.bam -n $i -f BAM -g mm --bw 150 -q 0.005 --outdir peakcalling ;
+done ;
+~~~
 # STAR Mapping(Rna-Seq)
 star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf
 `STAR --runThreadN 20 --genomeDir /project/functional-genomics/2019/data/genome/STARindex --readFilesIn /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610.fastq --outFileNamePrefix /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610_ --outFilterMismatchNmax 3 --outSAMtype BAM SortedByCoordinate --bamRemoveDuplicatesType UniqueIdentical --outWigType wiggle --outWigStrand Unstranded --outWigNorm RPM`

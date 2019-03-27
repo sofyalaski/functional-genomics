@@ -78,6 +78,7 @@ Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must 
 ## count reads per gene 
 use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html
 htseq-count -f bam -r name -o <alignment_files> <gff_file>
+* htseq names differ from the one from STAR or annotation, produce count tables with --quantMode in STAR Mapping.
 
 # comparing peaks
 bedtools https://bedtools.readthedocs.io/en/latest/

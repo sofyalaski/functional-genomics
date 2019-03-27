@@ -41,6 +41,8 @@ plotCorrelation from multiBamSummary /multiBigWigSummary (MEF):
 
  # peak calling with MACS2
 MACS2 https://github.com/taoliu/MACS
+
+MEF:
 ~~~
 MNaseTreatment="SRR5077653 SRR5077645 SRR5077641 SRR5077637 SRR5077633 SRR5077629 SRR5077625"
 for i in $MNaseTreatment;
@@ -101,3 +103,16 @@ creating bedfiles :
 ``` bash peaks_in_promotor.sh ```
 
 Results are in peak_comparison.txt
+
+# read counts in promotor regions
+MEF:  
+```
+PROMOTOR=/project/functional-genomics/2019/group3/peak_comparison/upstream2000_sorted.bed
+IN_FOLDER=/project/functional-genomics/2019/data/sra/MEF_G3/prefetched/mapped
+OUT_FOLDER=/project/functional-genomics/2019/group3/read_counts/MEF
+FILE_LIST="SRR5077625 SRR5077629 SRR5077633 SRR5077637 SRR5077641 SRR5077645 SRR5077649 SRR5077653 SRR5077657 SRR5077661 SRR5077665 SRR5077669 SRR5077673"
+for i in $FILE_LIST;
+	do bedtools coverage -a $PROMOTOR -b $IN_FOLDER/${i}_filtered.bam -counts > $OUT_FOLDER/${i}_readcounts.bed;
+	echo "$i is done" ;
+done ;
+```

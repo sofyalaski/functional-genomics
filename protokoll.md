@@ -65,15 +65,10 @@ star manual http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR
 ```
 STAR --runThreadN 20 --genomeDir /project/functional-genomics/2019/data/genome/STARindex --readFilesIn /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610.fastq --outFileNamePrefix /project/functional-genomics/2019/data/sra/MEF_G3/prefetched/RNAseq/SRR5077610_ --quantMode GeneCounts --outFilterMismatchNmax 3 --outSAMtype BAM SortedByCoordinate --bamRemoveDuplicatesType UniqueIdentical --outWigType wiggle --outWigStrand Unstranded --outWigNorm RPM
 ```
-
-## UCSC doesn't recognize all of chromosome names
-
-remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script)
-
 ## convert wiggle files into bigWig
 use unique.str1.wig files, as we are only interested in uniquely mapped reads(?). 
 `wigToBigWig /home/laskina/srr.wig sizes.genome /home/laskina/srr10.bw`
-Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must rename or ignore other chromosomes(done in previous step)
+Problem: UCSC and STAR Chromosome names are not equal -> error by calling, must rename or ignore other chromosomes(remove all of the chromosomes like "NT_16694" from the list and keep 19+XY Chromosomes(Python script))
 
 ## count reads per gene 
 use htseq: https://htseq.readthedocs.io/en/release_0.11.1/count.html

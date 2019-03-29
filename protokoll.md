@@ -24,17 +24,17 @@ for i in `ls /project/functional-genomics/2019/group3/MEF/*.bam | cut -d "." -f 
 done ;
  ```
 Quality Control:
-plotFingerprint for all TF's (MEF):
+plotFingerprint for all TF's (e.g. MEF):
 ``` 
 ./plotFingerprint -b /project/functional-genomics/2019/group3/MEF/SRR5077732_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077730_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077728_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077726_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077722_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077718_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077714_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077677_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077676_sorted.bam /project/functional-genomics/2019/group3/MEF/SRR5077673_sorted.bam -p max/2 -l Cebpb Cebpa Runx1 Fra1 Brg1 Hdac1 p300 cMyc Klf4 WCE_control -plot /project/functional-genomics/2019/group3/MEF/QC/fingerprint_MEF_TF.png 
  ``` 
-Create bamSummary/bigWigSummary (MEF):
+Create bamSummary/bigWigSummary (e.g. MEF):
 ``` 
 ./multiBamSummary bins -b /project/functional-genomics/2019/group3/MEF/*.bam -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_MEF.npz
 ./multiBigwigSummary bins -b /project/functional-genomics/2019/group3/MEF/bigWig/*.bw -bs 25 -p max/2 -o /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz
 ```  
 Quality Control:
-plotCorrelation from multiBamSummary /multiBigWigSummary (MEF):
+plotCorrelation from multiBamSummary /multiBigWigSummary (e.g. MEF):
 ``` 
 ./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_rm --removeOutliers --colorMap YlOrRd --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_MEF_rm.png
 ./plotCorrelation -in /project/functional-genomics/2019/group3/MEF/QC/results_bigWig_MEF.npz -c pearson -p heatmap -l H3K4me3 H3K4me2 H3K4me1 H3K9ac H3K27ac H3K27me3 H3K79me2 H3K36me3 H3K9me3 H3.3 H3 MNase_control WCE_control Klf4 cMyc p300 Hdac1 Brg1 Fra1 Runx1 Cebpa Cebpb MEF_ATAC-seq MEF_NODOX_ATAC-seq -T Correlation_MEF_bigWig_rm --removeOutliers --colorMap YlOrRd --outFileCorMatrix /project/functional-genomics/2019/group3/MEF/QC/PearsonCorr_Scores_bigWig_MEF_rm.tab -o /project/functional-genomics/2019/group3/MEF/QC/correlationMatrix_bigWig_MEF_rm.png

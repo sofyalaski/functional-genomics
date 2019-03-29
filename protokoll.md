@@ -7,6 +7,7 @@ convert files into fastq files with SRA Toolkit
 
 '/pkg/python-3.6.6-1/lib/python3.6/site-packages/deeptools/plotCoverage.py'
 
+quality control with FastQC
 
 # Bowtie2 Mapping(Chip-Seq, Atac-Seq)
 bowtie2 http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-aligner

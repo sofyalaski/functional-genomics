@@ -121,3 +121,15 @@ for i in $FILE_LIST;
 	echo "$i is done" ;
 done ;
 ```
+### Heatmaps for Peeks
+Calling: 
+```
+all TFs
+/package/sequencer/anaconda3/envs/ngs/bin/computeMatrix reference-point -R /project/functional-genomics/2019/group3/peak_comparison/cMyc_unique_ESC.bed /project/functional-genomics/2019/group3/peak_comparison/KLF4_unique_ESC.bed  /project/functional-genomics/2019/group3/peak_comparison/ESC_K_M_intersect.bed -S /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077692_1_sorted.bw /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077693_1_sorted.bw /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077725_1_sorted.bw /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077690_1_sorted.bw /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077691_1_sorted.bw /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077735_1_sorted.bw /project/functional-genomics/2019/group3/ESC/bigWig/SRR5077736_1_sorted.bw --skipZeros -o /project/functional-genomics/2019/group3/peaks_bw/TF_all_ESC.gz --outFileSortedRegions Heatmap_TF_all_ESC.bed --samplesLabel Klf4 cMyc Brg1 Oct4 Sox2 Nanog Esrrb -bs 100 -p max/2 
+
+/package/sequencer/anaconda3/envs/ngs/bin/plotHeatmap -m /project/functional-genomics/2019/group3/peaks_bw/TF_all_ESC.gz -o /project/functional-genomics/2019/group3/peaks_bw/TF_all_ESC.png
+
+``` 
+compare bed files with peaks with all the associated bigWig files. 
+
+
